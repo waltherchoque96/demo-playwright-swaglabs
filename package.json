@@ -1,0 +1,16 @@
+{
+  "name": "playwrigth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:runner": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "waltherchoque",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.44.1",
+    "playwright": "^1.44.1"
+  }
+}
