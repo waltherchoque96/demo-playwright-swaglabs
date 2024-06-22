@@ -1,7 +1,12 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
+  reporter: [['html', { outputFolder: 'my-report' }]],
   use: {
+    video: {
+      mode: 'on',
+      size: { width: 1200, height: 860 }
+    },
     launchOptions: {
       headless: false,
       args: ['--start-maximized'],

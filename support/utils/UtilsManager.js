@@ -1,23 +1,19 @@
 class Utils{
 
     verifyAscendingOrder(arrayPrices) {
-        let isSorted = true;
-
-        arrayPrices.some((price, i) => {
-            if (i < arrayPrices.length - 1 && price > arrayPrices[i + 1]) {
-                isSorted = false;
-                return true; 
+        for (let i = 0; i < arrayPrices.length - 1; i++) {
+            if (arrayPrices[i] > arrayPrices[i + 1]) {
+                return false;
             }
-            return false;
-        });
-
-        return isSorted;
+        }
+        return true;
     }
 
     verifyDescendingOrder(arrayPrices) {
         return arrayPrices.every((price, i) => 
             i === 0 || price <= arrayPrices[i - 1]);
     }
+   
 
 }
 

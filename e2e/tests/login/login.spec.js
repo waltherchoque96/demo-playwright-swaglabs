@@ -18,6 +18,7 @@ test.describe('Login Swags Lab', () => {
         await login.clickLoginButton();
         await home.verifySwagsLabsTitle();
         await home.verifyProductsTitle();
+        await page.waitForTimeout(1000);
     });
 
     test('Login not success', async ({ page }) => {
@@ -26,6 +27,12 @@ test.describe('Login Swags Lab', () => {
         await login.enterPassword('secret_sauce');
         await login.clickLoginButton();
         await login.verifyLoginError();
+        await page.waitForTimeout(1000);
+    });
+
+    test.afterEach(async ( { page } ) => {
+        await page.close();
+        console.log(`Finished ${test.info().title} with status ${test.info().status}`);
     });
 
 })

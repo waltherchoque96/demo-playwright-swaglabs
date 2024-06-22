@@ -10,68 +10,56 @@ test.describe('Home Swags Lab', () => {
         const home = new HomePage(page)
         await login.goto();
         await login.enterToSwagsLabs('standard_user', 'secret_sauce');
+        await page.waitForTimeout(500);
         await home.verifyProductsTitle();
     });
   
-    test('verify social networks', async ({ page }) => {
+    test('Verify social networks', async ({ page }) => {
         const home = new HomePage(page)
-    
+        await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
+
         await home.verifyLabelFacebook();
         await home.verifyLabelTwiter();
         await home.verifyLabelLinkedin();
+        
+        await page.waitForTimeout(1000);
     });
 
-    test('verify ascending order of items', async ({ page }) => {
-        await page.locator('.product_sort_container').selectOption('Price (low to high)');
+    test('Verify ascending order of items', async ({ page }) => {
+        const home = new HomePage(page)
 
-        var cords = [];
-        const prices = await page.$$('div[class="inventory_item_price"]');
-        for (const element of prices) {
-            const text = await element.textContent();
-            const numberMatch = text.match(/\d+(\.\d+)?/);
-            
-            if (numberMatch) {
-                cords.push(Number(numberMatch[0]));
-            }
-        }
-        console.log(cords);
+        await home.filterBy('Price (low to high)');
         
-        let isOrder = Utils.verifyAscendingOrder(cords);
+        await home.initialize();
+        const prices = await home.loopThroughPrices();
+        const isOrder = Utils.verifyAscendingOrder(prices);
+        
         expect(isOrder).toBeTruthy();
-
-        if (isOrder) {
-            console.log("El arreglo está ordenado de menor a mayor.");
-        } else {
-            console.log("El arreglo NO está ordenado de menor a mayor.");
-        }
+        console.log("["+prices+"] " + (isOrder ? "Los precios están ordenado de menor a mayor." : "Los precios NO están ordenado de menor a mayor."));
         
-
+        await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
+        await page.waitForTimeout(1000);
     });
 
-    test('verify descending order of items', async ({ page }) => {
-        await page.locator('.product_sort_container').selectOption('Price (high to low)');
+    test('Verify descending order of items', async ({ page }) => {
+        const home = new HomePage(page)
 
-        var cords = [];
-        const prices = await page.$$('div[class="inventory_item_price"]');
-        for (const element of prices) {
-            const text = await element.textContent();
-            const numberMatch = text.match(/\d+(\.\d+)?/);
-            
-            if (numberMatch) {
-                cords.push(Number(numberMatch[0]));
-            }
-        }
-        console.log(cords);
-        
-        let isOrder = Utils.verifyDescendingOrder(cords);
+        await home.filterBy('Price (high to low)');
+
+        await home.initialize();
+        const prices = await home.loopThroughPrices();
+        const isOrder = Utils.verifyDescendingOrder(prices);
+
         expect(isOrder).toBeTruthy();
-        if (isOrder) {
-            console.log("El arreglo está ordenado de mayor a menor.");
-        } else {
-            console.log("El arreglo NO está ordenado de mayor a menor.");
-        }
+        console.log("["+prices+"] " + (isOrder ? "Los precios están ordenado de mayor a menor." : "Los precios NO están ordenado de mayor a menor."));
         
+        await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
+        await page.waitForTimeout(1000);
     });
 
+    test.afterEach(async ( { page } ) => {
+        await page.close();
+        console.log(`Finished ${test.info().title} with status ${test.info().status}`);
+    });
  
 });
