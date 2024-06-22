@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:runner": "npx playwright test"
+    "test:runner": "npx playwright test",
+    "test:run:report" : "npx playwright test --reporter=html"
   },
   "keywords": [],
   "author": "waltherchoque",

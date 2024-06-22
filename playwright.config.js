@@ -8,7 +8,7 @@ module.exports = defineConfig({
       size: { width: 1200, height: 860 }
     },
     launchOptions: {
-      headless: false,
+      headless: true,
       args: ['--start-maximized'],
     },
   },
