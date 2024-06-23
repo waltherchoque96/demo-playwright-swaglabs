@@ -59,7 +59,7 @@ test.describe('Home Swags Lab', () => {
 
     test.afterEach(async ( { page } ) => {
         await page.close();
-        console.log(`Finished ${test.info().title} with status ${test.info().status}`);
+        //console.log(`Finished ${test.info().title} with status ${test.info().status}`);
     });
  
 });
