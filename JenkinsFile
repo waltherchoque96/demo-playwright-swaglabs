@@ -1,9 +1,10 @@
 pipeline {
-    agent { 
+    agent any
+    /*{ 
         docker { 
             image 'mcr.microsoft.com/playwright:v1.44.1-jammy' 
-               } 
-          }
+        } 
+    }*/
 
     stages {
         stage('Checkout Code') {
