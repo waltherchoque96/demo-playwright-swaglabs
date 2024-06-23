@@ -14,7 +14,7 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 println('**** Installing dependencies ****')
-                sh 'npm install'
+                bat 'npm install'
                 println('**** Dependencies Installed ****')
             }
         }
@@ -22,7 +22,7 @@ pipeline {
         stage('Run Playwright tests') {
             steps {
                 println('**** Trigger Tests ****')
-                sh 'npx playwright test'
+                bat 'npx playwright test'
             }
         }
 
