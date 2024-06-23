@@ -1,7 +1,8 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
-  reporter: [['html', { outputFolder: 'my-report' }]],
+  reporter: [['junit', { outputFile: 'test-results/results.xml' }]],
+  //reporter: [['html', { outputFolder: 'my-report' }]],
   use: {
     video: {
       mode: 'on',

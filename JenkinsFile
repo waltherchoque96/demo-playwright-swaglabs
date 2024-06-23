@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                deleteDir()
+                println('**** Checkout code from git repository ****')
+                checkout scm
+                println('**** Checkout code from git repository completed ****')
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                println('**** Installing dependencies ****')
+                sh 'npm install'
+                println('**** Dependencies Installed ****')
+            }
+        }
+
+        stage('Run Playwright tests') {
+            steps {
+                println('**** Trigger Tests ****')
+                sh 'npx playwright test'
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                println('**** Generating report ****')
+                junit '**/playwright-report/*.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+            println('**** Archive test results ****')
+            archiveArtifacts artifacts: '**/playwright-report/*.xml', allowEmptyArchive: true
+        }
+    }
+}
