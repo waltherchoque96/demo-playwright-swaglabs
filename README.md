@@ -2,6 +2,11 @@
 
 This is my personal portfolio about an UI automation project using Playwright.
 
+## Tools
+* Playwright
+* Allure Report
+* JavaScript
+
 ## How to Start
 
 1. Clone the project

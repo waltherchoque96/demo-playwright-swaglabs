@@ -3,7 +3,8 @@ import * as os from "os";
 
 module.exports = defineConfig({
   reporter: [
-    ["list"],
+    //["list"],
+    ["line"],
     [
       "allure-playwright",
       {
@@ -27,7 +28,7 @@ module.exports = defineConfig({
       size: { width: 1200, height: 860 }
     },
     launchOptions: {
-      headless: false,
+      headless: true,
       args: ['--start-maximized'],
     },
   },
@@ -37,7 +38,7 @@ module.exports = defineConfig({
       use: {
         browserName: `chromium`,
         channel: `chrome`,
-        headless: false,
+        headless: true,
         viewport: null,
       }
     },
@@ -47,7 +48,7 @@ module.exports = defineConfig({
         browserName: `firefox`,
         viewport: null,
         ignoreHTTPSErrors: true,
-        headless: false,
+        headless: true,
         screenshot: `only-on-failure`,
         launchOptions: {
           slowMo: 200
@@ -61,7 +62,7 @@ module.exports = defineConfig({
         channel: `msedge`,
         viewport: null,
         ignoreHTTPSErrors: true,
-        headless: false,
+        headless: true,
         screenshot: `only-on-failure`,
         launchOptions: {
           slowMo: 100
