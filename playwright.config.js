@@ -1,7 +1,25 @@
 const { defineConfig } = require('@playwright/test');
+import * as os from "os";
 
 module.exports = defineConfig({
-  reporter: [['junit', { outputFile: 'test-results/results.xml' }]],
+  reporter: [
+    ["list"],
+    [
+      "allure-playwright",
+      {
+        detail: true,
+        suiteTitle: false,
+        environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
+      },
+    ],
+  ],
+  //reporter: [['line'], ['allure-playwright']],
+  //reporter: [['junit', { outputFile: 'test-results/results.xml' }]],
   //reporter: [['html', { outputFolder: 'my-report' }]],
   use: {
     video: {
@@ -9,16 +27,46 @@ module.exports = defineConfig({
       size: { width: 1200, height: 860 }
     },
     launchOptions: {
-      headless: true,
+      headless: false,
       args: ['--start-maximized'],
     },
   },
   projects: [
     {
-      name: "chromium",
+      name: `Chrome`,
       use: {
+        browserName: `chromium`,
+        channel: `chrome`,
+        headless: false,
         viewport: null,
-      },
+      }
+    },
+    {
+      name: `Firefox`,
+      use: {
+        browserName: `firefox`,
+        viewport: null,
+        ignoreHTTPSErrors: true,
+        headless: false,
+        screenshot: `only-on-failure`,
+        launchOptions: {
+          slowMo: 200
+        }
+      }
+    },
+    {
+      name: `Edge`,
+      use: {
+        browserName: `chromium`,
+        channel: `msedge`,
+        viewport: null,
+        ignoreHTTPSErrors: true,
+        headless: false,
+        screenshot: `only-on-failure`,
+        launchOptions: {
+          slowMo: 100
+        }
+      }
     },
   ],
   outputDir: 'test-results',

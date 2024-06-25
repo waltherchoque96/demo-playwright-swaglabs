@@ -5,13 +5,25 @@
   "main": "index.js",
   "scripts": {
     "test:runner": "npx playwright test",
-    "test:run:report" : "npx playwright test --reporter=html"
+    "test:run:report:html": "npx playwright test --reporter=html",
+    "test:run:report:allure": "allure generate ./allure-results --clean && allure open",
+    "test:run:chrome": "npx playwright test --project=Chrome",
+    "test:run:firefox": "npx playwright test --project=Firefox",
+    "test:run:edge": "npx playwright test --project=Edge"
   },
-  "keywords": [],
+  "keywords": [
+    "Playwright",
+    "Test Automation",
+    "JavaScript"
+  ],
   "author": "waltherchoque",
   "license": "ISC",
   "dependencies": {
     "@playwright/test": "^1.44.1",
     "playwright": "^1.44.1"
+  },
+  "devDependencies": {
+    "allure-commandline": "^2.29.0",
+    "allure-playwright": "^3.0.0-beta.3"
   }
 }

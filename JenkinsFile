@@ -32,7 +32,7 @@ pipeline {
         stage('Run Playwright tests') {
             steps {
                 println('**** Trigger Tests ****')
-                bat 'npx playwright test'
+                bat 'npx playwright test --project=Chrome'
             }
         }
 

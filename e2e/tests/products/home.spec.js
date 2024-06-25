@@ -22,7 +22,7 @@ test.describe('Home Swags Lab', () => {
         await home.verifyLabelTwiter();
         await home.verifyLabelLinkedin();
         
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(2000);
     });
 
     test('Verify ascending order of items', async ({ page }) => {
@@ -33,12 +33,13 @@ test.describe('Home Swags Lab', () => {
         await home.initialize();
         const prices = await home.loopThroughPrices();
         const isOrder = Utils.verifyAscendingOrder(prices);
-        
+        await page.waitForTimeout(2000);
+
         expect(isOrder).toBeTruthy();
         console.log("["+prices+"] " + (isOrder ? "Los precios están ordenado de menor a mayor." : "Los precios NO están ordenado de menor a mayor."));
         
         await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(2000);
     });
 
     test('Verify descending order of items', async ({ page }) => {
@@ -49,17 +50,18 @@ test.describe('Home Swags Lab', () => {
         await home.initialize();
         const prices = await home.loopThroughPrices();
         const isOrder = Utils.verifyDescendingOrder(prices);
+        await page.waitForTimeout(2000);
 
         expect(isOrder).toBeTruthy();
         console.log("["+prices+"] " + (isOrder ? "Los precios están ordenado de mayor a menor." : "Los precios NO están ordenado de mayor a menor."));
         
         await page.evaluate(() => window.scrollBy(0, document.body.scrollHeight));
-        await page.waitForTimeout(1000);
+        await page.waitForTimeout(2000);
     });
 
     test.afterEach(async ( { page } ) => {
         await page.close();
-        //console.log(`Finished ${test.info().title} with status ${test.info().status}`);
+        console.log(`Finished ${test.info().title} with status ${test.info().status}`);
     });
  
 });
