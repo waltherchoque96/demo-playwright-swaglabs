@@ -40,7 +40,8 @@ pipeline {
         stage('Publish Test Results') {
             steps {
                 println('**** Generating report ****')
-                junit '**/playwright-report/*.xml'
+                //junit '**/playwright-report/*.xml'
+                junit 'test-results/results.xml'
             }
         }
     }
