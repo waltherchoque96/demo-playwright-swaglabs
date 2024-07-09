@@ -27,6 +27,7 @@ module.exports = defineConfig({
       mode: 'on',
       size: { width: 1200, height: 860 }
     },
+    executablePath: '/usr/bin/google-chrome-stable',
     launchOptions: {
       headless: true,
       args: ['--start-maximized'],
